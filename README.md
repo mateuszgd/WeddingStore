@@ -12,9 +12,9 @@
 - LINQ
 ## Libraries
 - jQuery
-## Frameworks:
+## Frameworks
 - Bootstrap
 - ASP.NET MVC 5
 - Entity Framework
-## DataBase:
+## DataBase
 - Microsoft SQL Server
