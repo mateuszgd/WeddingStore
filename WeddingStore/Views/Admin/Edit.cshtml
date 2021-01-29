@@ -1,0 +1,69 @@
+﻿@model WeddingStore.Domain.Models.Product
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card" style="border-top: none">
+    <div class="card-header">
+        <h3>Edytujesz produkt @Model.Name</h3>
+    </div>
+    @using (Html.BeginForm("Edit", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="card-body">
+            @Html.HiddenFor(m => m.ProductId)
+            @foreach (var k in ViewData.ModelMetadata.Properties)
+            {
+                switch (k.PropertyName)
+                {
+                    case "ProductId":
+                    case "DataImage":
+                    case "TypeImage":
+                        break;
+                    default:
+                    <div class="mb-3">
+                        <label><strong>@(k.DisplayName ?? k.PropertyName)</strong></label>
+                        @if (k.PropertyName == "Description")
+                         {
+                            @Html.TextArea(k.PropertyName, null,
+                                new { @class = "form-control", rows = 3 })
+                         }
+                         else
+                         {
+                            @Html.TextBox(k.PropertyName, null,
+                                new { @class = "form-control" })
+                         }
+                         @Html.ValidationMessage(k.PropertyName)
+                    </div>
+                    break;
+                }
+            }
+            <div class="mb-3">
+                <div style="position: relative;">
+                    <label><strong>Zdjęcie</strong></label>
+                    <a class='btn-sm btn-primary' style="text-decoration: none" href='javascript:;'>
+                        Dodaj zdjęcie
+                        <input type="file" name="img" size="40" style="position: absolute; left: 0; opacity: 0;"
+                           onchange='$("#choose-file").html($(this).val().split("\\").pop());'>
+                    </a>
+                    <span class='label label-info' id="choose-file"></span>
+                </div>
+                @if (Model.DataImage == null)
+                {
+                    <div class="form-control-static">Brak zdjęcia</div>
+                }
+                else
+                {
+                    <img class="img-thumbnail" width="150" height="150"
+                         src="@Url.Action("Image", "Product", new { Model.ProductId })" />
+                }
+            </div>
+        </div>
+        <div class="card-footer">
+            <input type="submit" value="Zapisz" class="btn btn-success"/>
+            @Html.ActionLink("Anuluj", "AdminConsole", null,
+                new { @class = "btn btn-outline-primary" })
+        </div>
+    }
+</div>

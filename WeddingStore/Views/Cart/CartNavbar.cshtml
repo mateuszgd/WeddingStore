@@ -1,0 +1,39 @@
+﻿@model WeddingStore.Domain.Models.CartFunctions
+
+@if (Model.SumItem() != 0)
+{
+    <div class="dropdown">
+        <button type="button" class="btn btn-default" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-shopping-cart" style="color:black"></i>
+            KOSZYK (@Model.Cart.Sum(m => m.Number))
+        </button>
+        <div class="dropdown-menu dropdown-menu-right">
+            @foreach (var k in Model.Cart)
+            {
+                <div class="row cart-dropdown">
+                    <div class="col-md-3" style="margin-left:15px; margin-top:5px">
+                        <img src="@Url.Action("Image", "Product", new { k.Product.ProductId })" alt="" width="33" height="24">
+                    </div>
+                    <div class="col-md-8">
+                        @k.Product.Name
+                        <p style="margin:auto"><strong>@k.Product.Price.ToString("c")</strong><span class="text-muted"> x</span> @k.Number</p>
+                    </div>
+                </div>
+                <hr>
+            }
+            <div class="cart-dropdown" style="margin:10px;">Do zapłaty:<p class="pull-right"><strong>@Model.SumItem().ToString("c")</strong></p></div>
+            <div class="text-center">
+                @Html.ActionLink("Przejdź do koszyka", "CartSummary", "Cart",
+                    new { url = Request.Url.PathAndQuery },
+                    new { @class = "btn btn-secondary cart-dropdown" })
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <button type="button" class="btn" disabled>
+        <i class="fa fa-shopping-cart"></i>
+        KOSZYK (@Model.Cart.Sum(m => m.Number))
+    </button>
+}

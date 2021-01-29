@@ -1,0 +1,28 @@
+﻿@model WeddingStore.Domain.Models.Product
+
+<div class="col-lg-4">
+    <div class="card border-0 mb-3">
+        @if (Model.DataImage != null)
+        {
+            <img class="img-responsive" src="@Url.Action("Image", "Product", new { Model.ProductId })" alt="" width="352" height="235">
+        }
+        <div class="card-body">
+            <div class="card-title">@Model.Name</div>
+            <div class="row">
+                <div class="col">
+                    <div class="card-text">@Model.Price.ToString("c")</div>
+                </div>
+                <div class="col">
+                    @using (Html.BeginForm("AddItemToCart", "Cart"))
+                    {
+                        <div class="pull-right">
+                            @Html.HiddenFor(m => m.ProductId)
+                            @Html.Hidden("url", Request.Url.PathAndQuery)
+                            <button type="submit" class="btn btn-outline-dark btn-circle"><i class="fa fa-shopping-cart"></i></button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

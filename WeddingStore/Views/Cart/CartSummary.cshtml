@@ -1,0 +1,52 @@
+﻿@model WeddingStore.Models.CartContents
+
+@{
+    ViewBag.Title = "CartSummary";
+}
+
+@if (Model.cartFunctions.SumItem() != 0)
+{
+    <div class="container">
+        <div class="card shopping-card">
+            <div class="card-header">TWÓJ KOSZYK</div>
+            <div class="card-body">
+                @foreach (var m in Model.cartFunctions.Cart)
+                {
+                    <div class="row">
+                        <div class="col-md-2">
+                            <img class="img-responsive" src="@Url.Action("Image", "Product", new { m.Product.ProductId })" alt="" width="120" height="80" />
+                        </div>
+                        <div class="col-md-6 body-card">@m.Product.Name</div>
+                        <div class="col-md-2 body-card text-right">@m.Product.Price.ToString("c") <span class="text-muted">x</span></div>
+                        <div class="col-md-1 body-card">@m.Number</div>
+                        <div class="col" style="margin-top: 15px">
+                            @using (Html.BeginForm("RemoveItemCart", "Cart"))
+                            {
+                                @Html.Hidden("ProductId", m.Product.ProductId)
+                                @Html.HiddenFor(k => k.Url)
+                                <button class="btn btn-outline-dark"><i class="fa fa-trash"></i></button>
+                            }
+                        </div>
+                    </div>
+                    <hr>
+                }
+                <div><a href="@Model.Url" class="btn btn-outline-secondary pull-right">Kontynuuj zakupy</a></div>
+            </div>
+            <div class="card-footer">
+                <div class="pull-right"><a href="@Url.Action("SubmitOrder", "Cart")" class="btn btn-secondary">Złóż zamówienie</a></div>
+                <div class="pull-right" style="margin: 10px"><strong>Łączna kwota: @Model.cartFunctions.SumItem().ToString("c")</strong></div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="container">
+        <div class="card shopping-card">
+            <div class="card-body">
+                <div class="empty-cart">Twój koszyk jest pusty.</div>
+            </div>
+            <div class="text-center" style="margin-bottom: 15px"><a href="@Model.Url" class="btn btn-secondary">Powrót do sklepu</a></div>
+        </div>
+    </div>
+}

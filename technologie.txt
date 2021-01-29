@@ -1,0 +1,16 @@
+Technologies:
+-CSS
+-HTML5
+
+Frameworks:
+-Bootstrap
+
+
+
+
+SQL Server -> Entity Framework <- LINQ
+Ninject
+silnik Razor
+T-SQL
+jQuery
+

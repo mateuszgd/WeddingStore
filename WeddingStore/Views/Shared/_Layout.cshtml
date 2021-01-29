@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link href="~/Content/custom.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-white navbar-light fixed-top">
+        <div class="navbar-collapse collapse w-100">
+            <a class="navbar-brand mr-auto" href="#">
+                <img src="~/img/logo.png" alt="" width="100" height="100">
+            </a>
+        </div>
+        <div class="navbar-collapse collapse w-100">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">STRONA GŁÓWNA</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">PORTFOLIO</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Shop", "Product")">SKLEP</a>
+                <li/>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">O NAS</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">KONTAKT</a>
+                </li>
+            </ul>
+        </div>
+        <div class="navbar-collapse collapse w-100">
+            <div class="navbar-nav ml-auto">
+                <a href="@Url.Action("Login", "Account")" class="btn btn-default">
+                    <i class="fa fa-user" style="color: black"></i>
+                    ZALOGUJ SIĘ
+                </a>
+                <div>
+                    @Html.Action("CartNavbar", "Cart")
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        @RenderBody()
+    </div>
+
+    <footer>
+        <div class="row">
+            <div class="col-md-4 footer-card" style="color:dimgrey; font-size: 1.5em">
+                Copyright © 2021
+            </div>
+            <div class="col-md-4">
+
+            </div>
+            <div class="col-md-4 fa-icons text-right">
+                <a href="https://pl-pl.facebook.com/" class="fa fa-facebook"></a>
+                <a href="https://www.instagram.com/" class="fa fa-instagram"></a>
+                <a href="https://twitter.com/" class="fa fa-twitter"></a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

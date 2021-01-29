@@ -1,0 +1,61 @@
+﻿@model WeddingStore.Domain.Models.Order
+
+@{
+    ViewBag.Title = "SubmitOrder";
+    Layout = "~/Views/Shared/_OrderLayout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="col-md-4 mx-auto card">
+        <div class="container">
+            @Html.Action("OrderValue", "Cart")
+            <hr>
+            <h4 class="mb-3">Dane adresowe</h4>
+            <div class="mb-3">
+                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", placeholder = "Imię *" })
+                @Html.ValidationMessageFor(m => m.FirstName)
+            </div>
+            <div class="mb-3">
+                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", placeholder = "Nazwisko *" })
+                @Html.ValidationMessageFor(m => m.LastName)
+            </div>
+            <div class="mb-3">
+                @Html.TextBoxFor(m => m.Mail, new { @class = "form-control", placeholder = "E-mail *" })
+                @Html.ValidationMessageFor(m => m.Mail)
+            </div>
+            <div class="mb-3">
+                @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", placeholder = "Telefon *" })
+                @Html.ValidationMessageFor(m => m.Phone)
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    @Html.TextBoxFor(m => m.Street, new { @class = "form-control", placeholder = "Ulica *" })
+                    @Html.ValidationMessageFor(m => m.Street)
+                    <div>@Html.ValidationMessageFor(m => m.House)</div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    @Html.TextBoxFor(m => m.House, new { @class = "form-control", placeholder = "Nr domu *" })
+                </div>
+                <div class="col-md-3 mb-3">
+                    @Html.TextBoxFor(m => m.Apartment, new { @class = "form-control", placeholder = "Nr lokalu" })
+                </div>
+            </div>
+            <div class="mb-3">
+                @Html.TextBoxFor(m => m.City, new { @class = "form-control", placeholder = "Miasto *" })
+                @Html.ValidationMessageFor(m => m.City)
+            </div>
+            <div class="mb-3">
+                @Html.TextBoxFor(m => m.Zip, new { @class = "form-control", placeholder = "Kod pocztowy *" })
+                @Html.ValidationMessageFor(m => m.Zip)
+            </div>
+            <hr>
+            <div class="text-center mb-3">
+                <button type="submit" class="btn btn-secondary">Zakończ zamówienie</button>
+            </div>
+        </div>
+    </div>
+}
+
+
+

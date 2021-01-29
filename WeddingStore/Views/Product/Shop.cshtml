@@ -1,0 +1,29 @@
+﻿@model WeddingStore.Models.AllDataToView
+
+@{
+    ViewBag.Title = "Shop";
+}
+
+<div class="row row-categories">
+    <div class="col-lg-2">
+        <div class="card pull-left" style="width: 18rem;">
+            <div class="card-header">
+                KATEGORIE
+            </div>
+            <ul class="list-group list-group-flush">
+                @Html.Action("Categories", "Product")
+            </ul>
+        </div>
+    </div>
+    <div class="col">
+        <div class="row row-categories">
+            @foreach (var m in Model.Products)
+            {
+                @Html.Partial("Card", m);
+            }
+        </div>
+        <div class="text-center">
+            @Html.LinksPage(Model.PageLink, x => Url.Action("Shop", new { subpage = x, category = Model.SelectedCategory }))
+        </div>
+    </div>
+</div>

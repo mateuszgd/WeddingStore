@@ -1,0 +1,64 @@
+﻿@model IEnumerable<WeddingStore.Domain.Models.Product>
+
+@{
+    ViewBag.Title = "AdminConsole";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card" style="border-top: none">
+    <h3 class="card-header" style="height: 75px; padding: 15px">Produkty</h3>
+    <div class="card-body">
+        <table class="table table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th>Id</th>
+                    <th>Nazwa</th>
+                    <th>Cena</th>
+                    <th>Kategoria</th>
+                    <th>Akcje</th>
+                </tr>
+            </thead>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.ProductId
+                    </td>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        @item.Price.ToString("c")
+                    </td>
+                    <td>
+                        @item.Category
+                    </td>
+                    <td>
+                        <div class="row" style="margin: auto">
+
+                            <button class="btn-sm btn-outline-dark" onclick="location.href='@Url.Action("Edit", "Admin", new { item.ProductId })'" style="margin-right: 3px;">
+                                <i class="fa fa-edit"></i>
+                            </button>
+
+                            @using (Html.BeginForm("Details", "Admin"))
+                            {
+                                @Html.Hidden("ProductId", item.ProductId)
+                                <button class="btn-sm btn-outline-dark" style="margin-right: 3px;"><i class="fa fa-eye"></i></button>
+                            }
+                            @using (Html.BeginForm("Delete", "Admin"))
+                            {
+                                @Html.Hidden("ProductId", item.ProductId)
+                                <button class="btn-sm btn-outline-dark" style="margin-right: 3px;"><i class="fa fa-trash"></i></button>
+                            }
+                        </div>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    <div class="card-footer">
+        @Html.ActionLink("Utwórz nowy produkt", "Create", null,
+            new { @class = "btn btn-secondary" })
+    </div>
+</div>

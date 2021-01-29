@@ -1,0 +1,14 @@
+﻿@model IEnumerable<string>
+
+@foreach (var x in Model)
+{
+    @Html.RouteLink(x, new
+    {
+        controller = "Product",
+        action = "Shop",
+        category = x.ToLowerInvariant().Replace(' ', '-')
+    }, new
+    {
+        @class = "list-group-item"
+    })
+}
